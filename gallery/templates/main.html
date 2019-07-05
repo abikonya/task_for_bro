@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery for bro.</title>
+    <link rel="stylesheet" type="text/css" href="{% static "/css/base.css" %}">
+</head>
+<body>
+    <div class="brand">Gallery as test_task for <strong>bro.</strong></div>
+    <div class="settings">Settings</div>
+    <div class="images">Images
+        {% for image in images %}
+        <ul>
+            <li>
+                <img src="{{ image.image.url }}" alt="{{ image.name }}">
+            </li>
+        </ul>
+        {% endfor %}
+
+
+    </div>
+    <div class="footer">Pages</div>
+</body>
+</html>

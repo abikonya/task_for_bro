@@ -1,0 +1,12 @@
+.body {
+}
+
+.brand {
+    color: black;
+    font-size: 25px;
+}
+
+.images {
+    padding: 200px;
+    border: solid red;
+}
