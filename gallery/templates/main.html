@@ -8,28 +8,36 @@
 </head>
 <body>
     <div class="brand">Gallery as test_task for <strong>bro.</strong></div>
+    
+    <div class="login">
+        {% if user.is_authenticated %}
+        <br> <strong>Hi, {{ user.username}}!</strong> <a href="/test_task/logout">Logout</a>
+        {% else %}
+        <br> <strong>Who are you?</strong> <a href="/test_task/login">Login</a>
+        {% endif %}
+
+    </div>
+    
     <div class="settings">
 
         {% if user.is_authenticated %}
-        <br> {{ load_form }}
+        <form enctype="multipart/form-data" name="upload_image" method="POST">{%csrf_token%}
+            <br>{{ load_form }}
+            <br><label class="required" for="upload_image">Tags:</label><input type="text" name="tags" required id="upload_image">
+            <div class="submit-row">
+                <label></label><input type="submit" value="Загрузить">
+            </div>      
+        </form>
         {% endif %}
 
     </div>
-
-    <div class="login">
-        {% if user.is_authenticated %}
-        <strong>Hi, {{ user.username}}!</strong> <a href="/test_task/logout">Logout</a>
-        {% else %}
-        <strong>Who are you?</strong> <a href="/test_task/login">Login</a>
-        {% endif %}
-
-    </div>
+    
     <div class="images">
 
         {% for image in images %}
         <ul>
             <li class="images_list">
-                <img src="{{ image.image.url }}" alt="{{ image.name }}">
+                <a href="{{ image.image.url }}"><img src="{{ image.image.url }}" alt="{{ image.name }}"></a>
             </li>
         </ul>
         {% endfor %}

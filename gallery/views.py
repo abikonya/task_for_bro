@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import TemplateView, View
 from django.contrib.auth import login, logout
 from gallery.models import Images, Settings
-from django.forms import ClearableFileInput
+from django.forms import FileInput
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
 
@@ -27,12 +27,16 @@ class Main(TemplateView):
         else:
             ctx['images'] = images
         if request.user.is_authenticated:
-            load_form = ClearableFileInput()
+            load_form = FileInput()
             ctx['load_form'] = load_form.render(name='upload', value='Upload')
         return render(request, self.template_name, ctx)
 
-    def post(self, request):
-        pass
+    def post(self, request, *args):
+        for each in request.FILES:
+            file = request.FILES[each]
+            new_image = Images(tags=request.POST.get('tags'), image=file)
+            new_image.save()
+        return HttpResponseRedirect('/test_task/')
 
 
 class LoginFormView(FormView):
