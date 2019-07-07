@@ -22,7 +22,9 @@
 
         {% if user.is_authenticated %}
         <form enctype="multipart/form-data" name="upload_image" method="POST">{%csrf_token%}
-            <br>{{ load_form }}
+            {% for form in all_forms %}
+                <br> {{ form }}
+            {% endfor %}
             <br><label class="required" for="upload_image">Tags:</label><input type="text" name="tags" required id="upload_image">
             <div class="submit-row">
                 <label></label><input type="submit" value="Загрузить">

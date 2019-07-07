@@ -34,7 +34,13 @@ class Main(TemplateView):
             ctx['images'] = images
         if request.user.is_authenticated:
             load_form = FileInput()
-            ctx['load_form'] = load_form.render(name='upload', value='Upload')
+            max_photos_to_upload = [x for x in range(10)]
+            all_forms = []
+            for each in max_photos_to_upload:
+                name = 'upload' + str(each)
+                value = 'Upload' + str(each)
+                all_forms.append(load_form.render(name=name, value=value))
+            ctx['all_forms'] = all_forms
         return render(request, self.template_name, ctx)
 
     def post(self, request, *args):
