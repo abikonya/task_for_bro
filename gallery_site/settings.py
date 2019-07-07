@@ -119,15 +119,15 @@ USE_TZ = True
 # Default storage and URL for uploaded images
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Images')
-MEDIA_URL = '/Images/'
+MEDIA_URL = '/test_task/Images/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/test_task/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "gallery/templates"),
+    os.path.join(BASE_DIR, 'gallery/templates'),
 ]

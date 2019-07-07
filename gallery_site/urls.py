@@ -21,6 +21,6 @@ app_name = 'gallery'
 
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url('', include('gallery.urls'), name=['gallery'])
+    url('test_task/admin/', admin.site.urls),
+    url('test_task/', include('gallery.urls'), name=['gallery'])
 ]

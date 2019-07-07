@@ -1,5 +1,5 @@
 from django.contrib import admin
-from gallery.models import Images
+from gallery.models import Images, Settings
 
 
 class ImagesAdmin(admin.ModelAdmin):
@@ -7,4 +7,10 @@ class ImagesAdmin(admin.ModelAdmin):
     search_fields = ('name', 'tags', 'created')
 
 
+class SettingsAdmin(admin.ModelAdmin):
+    list_display = ('display', 'number_displayed', 'method', 'interval_for_slideshow', 'created')
+    search_fields = ('created',)
+
+
 admin.site.register(Images, ImagesAdmin)
+admin.site.register(Settings, SettingsAdmin)

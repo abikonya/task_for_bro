@@ -8,8 +8,24 @@
 </head>
 <body>
     <div class="brand">Gallery as test_task for <strong>bro.</strong></div>
-    <div class="settings">Settings</div>
-    <div class="images">Images
+    <div class="settings">
+
+        {% if user.is_authentificated %}
+        <br> {{ load_form }}
+        {% endif %}
+
+    </div>
+
+    <div class="login">
+        {% if user.is_authentificated %}
+        <strong>Hi, {{ user.username}}!</strong> <a href="/test_task/logout">Logout</a>
+        {% else %}
+        <strong>Who are you?</strong> <a href="/test_task/login">Login</a>
+        {% endif %}
+
+    </div>
+    <div class="images">
+
         {% for image in images %}
         <ul>
             <li>
@@ -17,9 +33,13 @@
             </li>
         </ul>
         {% endfor %}
-
+        <a href=""></a>
 
     </div>
-    <div class="footer">Pages</div>
+    <div class="footer">Pages
+    {% for page in pages %}
+        <a href="/test_task/{{ page }}">{{ page }}</a>
+    {% endfor %}
+    </div>
 </body>
 </html>
