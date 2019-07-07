@@ -15,10 +15,16 @@ class Main(TemplateView):
 
     def get(self, request, page):
         ctx = dict()
-        images = Images.objects.all()
-        number_displayed = int(Settings.objects.all().latest('created').number_displayed)
+        settings = Settings.objects.all().latest('created')
+        if settings.method == 'RND':
+            images = Images.objects.all()
+        elif settings.method == 'D':
+            images = Images.objects.all().order_by('created')
+        else:
+            images = Images.objects.all().order_by('name')
+        number_displayed = int(settings.number_displayed)
         if images.count() >= number_displayed:
-            total_pages = images.count() // number_displayed + images.count() % number_displayed
+            total_pages = int(images.count() // number_displayed + images.count() / number_displayed)
             ctx['pages'] = [x+1 for x in range(total_pages)]
             if page == 1:
                 ctx['images'] = images[:number_displayed]

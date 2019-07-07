@@ -13,7 +13,6 @@ class Images(models.Model):
     class Meta:
         verbose_name_plural = 'Images'
         verbose_name = 'Image'
-        ordering = ['-created', '-name']
 
 
 # Settings model
