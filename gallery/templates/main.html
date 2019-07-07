@@ -10,14 +10,14 @@
     <div class="brand">Gallery as test_task for <strong>bro.</strong></div>
     <div class="settings">
 
-        {% if user.is_authentificated %}
+        {% if user.is_authenticated %}
         <br> {{ load_form }}
         {% endif %}
 
     </div>
 
     <div class="login">
-        {% if user.is_authentificated %}
+        {% if user.is_authenticated %}
         <strong>Hi, {{ user.username}}!</strong> <a href="/test_task/logout">Logout</a>
         {% else %}
         <strong>Who are you?</strong> <a href="/test_task/login">Login</a>
