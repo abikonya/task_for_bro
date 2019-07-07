@@ -16,9 +16,18 @@ img {
     padding: 200px;
     border: solid red;
 }
+
+ul {
+    display: inline;
+    margin: 0;
+    padding: 4px;
+}
+
 li {
-    display: block;
+    display: inline-block;
     text-decoration: none;
+    border: 1px solid black;
+
 }
 
 .settings {

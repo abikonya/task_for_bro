@@ -26,7 +26,7 @@ class Main(TemplateView):
                 ctx['images'] = images[(int(page)*number_displayed)-number_displayed:int(page)*number_displayed]
         else:
             ctx['images'] = images
-        if request.user.is_authenticated:
+        if request.user.is_authentificated:
             load_form = ClearableFileInput()
             ctx['load_form'] = load_form.render(name='upload', value='Upload')
         return render(request, self.template_name, ctx)
