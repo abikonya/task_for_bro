@@ -5,6 +5,7 @@ from gallery.models import Images, Settings
 from django.forms import FileInput
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
+from math import ceil
 
 from PIL import ImageMode
 
@@ -24,7 +25,7 @@ class Main(TemplateView):
             images = Images.objects.all().order_by('name')
         number_displayed = int(settings.number_displayed)
         if images.count() >= number_displayed:
-            total_pages = int(images.count() // number_displayed + images.count() / number_displayed)
+            total_pages = ceil(images.count() // number_displayed)
             ctx['pages'] = [x+1 for x in range(total_pages)]
             if page == 1:
                 ctx['images'] = images[:number_displayed]
