@@ -6,6 +6,7 @@ from django.forms import FileInput
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
 from math import ceil
+from random import shuffle
 
 from PIL import ImageMode
 
@@ -19,6 +20,8 @@ class Main(TemplateView):
         settings = Settings.objects.all().latest('created')
         if settings.method == 'RND':
             images = Images.objects.all()
+            list_of_images = [image for image in images]
+            shuffle(list_of_images)
         elif settings.method == 'D':
             images = Images.objects.all().order_by('created')
         else:
@@ -28,9 +31,15 @@ class Main(TemplateView):
             total_pages = ceil(images.count() / number_displayed)
             ctx['pages'] = [x+1 for x in range(total_pages)]
             if page == 1:
-                ctx['images'] = images[:number_displayed]
+                if settings.method == 'RND':
+                    ctx['images'] = list_of_images[:number_displayed]
+                else:
+                    ctx['images'] = images[:number_displayed]
             else:
-                ctx['images'] = images[(int(page)*number_displayed)-number_displayed:int(page)*number_displayed]
+                if settings.method == 'RND':
+                    ctx['images'] = list_of_images[(int(page)*number_displayed)-number_displayed:int(page)*number_displayed]
+                else:
+                    ctx['images'] = images[(int(page)*number_displayed)-number_displayed:int(page)*number_displayed]
         else:
             ctx['images'] = images
         if request.user.is_authenticated:
