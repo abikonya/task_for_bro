@@ -25,7 +25,7 @@ class Main(TemplateView):
             images = Images.objects.all().order_by('name')
         number_displayed = int(settings.number_displayed)
         if images.count() >= number_displayed:
-            total_pages = ceil(images.count() // number_displayed)
+            total_pages = ceil(images.count() / number_displayed)
             ctx['pages'] = [x+1 for x in range(total_pages)]
             if page == 1:
                 ctx['images'] = images[:number_displayed]
